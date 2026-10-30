@@ -34,4 +34,39 @@ case
 end as [High/Medium/Low]
 from Products
 
--- Provide priority to each category and sort the data ascendinf tt 
+-- Provide priority to each category and sort the data in ascending order
+select * from Products
+order by
+case 
+    when Category in ('Electronics') then 1
+    when Category in ('Furniture') then  2
+    else 3
+end 
+
+-------------------OR------------------
+
+select * from Products
+order by
+case 
+    when Category in ('Electronics') then 1
+    when Category in ('Furniture') then 2
+    when Category = 'Accessories' then 3
+end 
+
+-- Nested Case statement
+select *,
+case 
+    when Category = 'Electronics' then
+        case when Price >= 300 then 'Premium Electronics'
+            else 'Affordable Electronics'
+        end
+    when Category in ('Furniture') then
+        case when Price >= 300 then 'Premium Furniture'
+            else 'Affordable Furniture'
+        end
+    else 
+        case when Price >= 300 then 'Premium Accessories'
+            else 'Affordable Accessories'
+        end
+end Quality
+from Products
