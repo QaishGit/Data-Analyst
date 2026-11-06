@@ -44,3 +44,16 @@ group by EmployeeID
 having COUNT(EmployeeID) > 1
 
 --5) Write a query to find the total sales for each month in 2023.
+select MONTH(SaleDate) as SaleMonth, SUM(SaleAmount) 
+from EmployeeSales
+where SaleDate between '2023-01-01' and '2023-12-31'
+group by MONTH(SaleDate)
+order by SaleMonth
+
+-- OR
+
+select DATENAME(MONTH, SaleDate) as SaleMonth, SUM(SaleAmount) 
+from EmployeeSales
+where YEAR(SaleDate) = 2023
+group by DATENAME(MONTH, SaleDate)
+order by SaleMonth
